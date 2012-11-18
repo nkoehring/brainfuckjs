@@ -1,0 +1,8 @@
+BRAINFUCK in JS
+===============
+
+Simple and quite verbose Brainfuck interpreter written in a nightly session out
+of boredom.
+
+See index.html and brainfuck.js for usage information.
+

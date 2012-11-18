@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>Brainfuck</title>
+    <link href='http://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet' type='text/css'>
+    <style>
+      body {
+        background: black;
+        color: white;
+        font-family: 'Philosopher', sans-serif;
+      }
+      textarea {
+        background: #333;
+        color: white;
+        border: 2px solid #555;
+        padding: 0.5em;
+      }
+      #src {
+        display: block;
+        width: 600px;
+        height: 200px;
+        margin: auto;
+      }
+      #stdio {
+        margin: auto;
+        width: 602px;
+      }
+      #stdin, #stdout {
+        width: 296px;
+        height: 100px;
+        margin: 0 1px;
+      }
+      #stdin { background: #333 url(stdin.png) bottom right no-repeat; }
+      #stdout { background: #333 url(stdout.png) bottom right no-repeat; }
+      h1 {
+        text-align: center;
+        margin: 0.5em;
+      }
+      input {
+        width: 200px;
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Brainfuck Interpreter in JS</h1>
+    <textarea id="src" placeholder="Example: >,[>,]<[.<]"></textarea>
+    <div id="stdio">
+      <textarea id="stdin" placeholder="Example: abc"></textarea>
+      <textarea id="stdout"></textarea>
+    </div>
+    <input type="button" onclick="doIt()" value="do it!">
+    <script src="brainfuck.js"></script>
+    <script>
+      function doIt() {
+        var code = document.getElementById("src").value
+        var stdout = document.getElementById("stdout")
+        var stdin = document.getElementById("stdin")
+        var debug = true    // turns on verbose step by step output in console
+
+        function input() {
+          var c = ~~stdin.value.charCodeAt(0) // ~~: undefined/NaN becomes 0
+          stdin.value = stdin.value.slice(1)
+          return c
+        }
+        function output(c) {
+          stdout.value += String.fromCharCode(c)
+        }
+
+        stdout.value = ""   // reset output field
+        brainfuck(code, input, output, debug)
+      }
+    </script>
+  </body>
+</html>
